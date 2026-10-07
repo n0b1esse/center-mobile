@@ -86,7 +86,10 @@
 <button class="chip" data-filter="used">Б/у</button>
 </div>
 </div>
-<div class="grid-catalog" id="catalogGrid">
+<div class="carousel-bar"><span id="carCount">1 / 8</span></div>
+<div class="carousel-wrap">
+<button class="car-btn overlay left" id="carPrev" type="button" aria-label="Листать назад">←</button>
+<div class="grid-catalog" id="catalogGrid" tabindex="0" aria-label="Карусель телефонов">
 
 <article class="card" data-type="apple new hit" data-id="iphone14">
 <div class="card-top"><span class="badge hit">Хит</span><button class="card-photo" data-open="iphone14" aria-label="Открыть iPhone 14"><img src="assets/img/iphone-14.jpg" alt="iPhone 14 128 ГБ" loading="lazy"></button></div>
@@ -144,6 +147,8 @@
 <div class="card-btns"><a class="mini-btn call" href="tel:+996000000000">Позвонить</a><a class="mini-btn wa" href="https://wa.me/996000000000?text=Здравствуйте! Интересует Poco M6 Pro" target="_blank" rel="noopener">WhatsApp</a><button class="mini-btn more" data-open="pocom6" type="button">Подробнее</button></div></div>
 </article>
 
+</div>
+<button class="car-btn overlay right" id="carNext" type="button" aria-label="Листать вперед">→</button>
 </div>
 <p class="sub" style="margin-top:16px">Нужной комплектации нет. Напишите в WhatsApp, привезем за 1-2 дня без предоплаты.</p>
 </div></section>

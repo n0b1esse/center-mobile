@@ -17,6 +17,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const chips = document.querySelectorAll(".chip");
   const cards = document.querySelectorAll("#catalogGrid .card");
+  const car = document.getElementById("catalogGrid");
+  const carPrev = document.getElementById("carPrev");
+  const carNext = document.getElementById("carNext");
+  const carCount = document.getElementById("carCount");
+  function visibleCards(){ return Array.from(cards).filter(c => c.style.display !== "none"); }
+  function stepSize(){
+    const v = visibleCards()[0];
+    if(!v) return 280;
+    return v.getBoundingClientRect().width + 14;
+  }
+  function updateCount(){
+    if(!car || !carCount) return;
+    const total = visibleCards().length;
+    const max = car.scrollWidth - car.clientWidth - 4;
+    if(total === 0 || max <= 0){ carCount.textContent = total + " / " + total; }
+    else {
+      const i = Math.min(total, Math.round(car.scrollLeft / stepSize()) + 1);
+      carCount.textContent = i + " / " + total;
+    }
+    if(carPrev) carPrev.disabled = car.scrollLeft <= 4;
+    if(carNext) carNext.disabled = car.scrollLeft >= max;
+  }
   chips.forEach(ch => ch.addEventListener("click", () => {
     chips.forEach(c => c.classList.remove("active"));
     ch.classList.add("active");
@@ -26,7 +48,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const show = f === "all" || types.includes(f);
       card.style.display = show ? "" : "none";
     });
+    if(car) car.scrollTo({ left: 0 });
+    requestAnimationFrame(updateCount);
   }));
+  if(carPrev) carPrev.addEventListener("click", () => car.scrollBy({ left: -stepSize(), behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }));
+  if(carNext) carNext.addEventListener("click", () => car.scrollBy({ left: stepSize(), behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }));
+  if(car){
+    let t;
+    car.addEventListener("scroll", () => { clearTimeout(t); t = setTimeout(updateCount, 80); }, { passive: true });
+    addEventListener("resize", updateCount);
+  }
+  updateCount();
 
   const modelSel = document.getElementById("calcModel");
   const condBtns = document.querySelectorAll(".cond button");

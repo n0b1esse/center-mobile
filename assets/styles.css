@@ -111,7 +111,18 @@ h2{font-size:clamp(26px,3.6vw,40px)}
 .filters{display:flex;gap:8px;flex-wrap:wrap}
 .chip{border:1px solid var(--line);background:#fff;border-radius:100px;padding:9px 16px;font-weight:700;cursor:pointer;font-size:13.5px;color:#2A2E36}
 .chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
-.grid-catalog{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.carousel-bar{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin:4px 0 10px}
+.carousel-wrap{position:relative}
+.car-btn{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:18px;line-height:1;display:grid;place-items:center;color:var(--ink)}
+.car-btn.overlay{position:absolute;top:38%;z-index:5;background:rgba(255,255,255,.72);backdrop-filter:blur(8px);border-color:rgba(16,18,22,.12);box-shadow:0 6px 20px rgba(16,18,22,.16);opacity:.85}
+.car-btn.overlay.left{left:6px}
+.car-btn.overlay.right{right:6px}
+.car-btn:hover:not(:disabled){background:var(--ink);color:#fff;border-color:var(--ink);opacity:1}
+.car-btn:disabled{opacity:0;pointer-events:none}
+#carCount{font-size:13px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.grid-catalog{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 14px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.grid-catalog::-webkit-scrollbar{display:none}
+.grid-catalog .card{flex:0 0 272px;scroll-snap-align:start}
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .18s ease,transform .18s ease}
 .card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
 .card-top{padding:14px;background:#F1F2F4;position:relative}
@@ -223,7 +234,7 @@ footer{background:var(--dark);color:#AEB6C2;padding:28px 0;margin-top:28px}
 
 @media(max-width:980px){
   .hero-grid,.buy-grid,.two,.contact-grid{grid-template-columns:1fr}
-  .grid-catalog{grid-template-columns:1fr 1fr}
+  .grid-catalog .card{flex-basis:300px}
   .grid-acc{grid-template-columns:1fr 1fr}
   .trust{grid-template-columns:1fr 1fr}
   .trust div:nth-child(3){border-left:0}
@@ -233,7 +244,50 @@ footer{background:var(--dark);color:#AEB6C2;padding:28px 0;margin-top:28px}
   .nav{display:none}
 }
 @media(max-width:600px){
-  .grid-catalog,.grid-acc,.steps{grid-template-columns:1fr}
+  .hero{padding:18px 0 4px}
+  .hero-grid{gap:14px}
+  .hero h1{font-size:26px;margin:8px 0}
+  .hero p.lead{font-size:13.5px}
+  .live-row{font-size:10.5px;padding:5px 10px}
+  .hero-meta{gap:6px;margin:10px 0}
+  .pill{font-size:11.5px;padding:5px 10px}
+  .hero-actions{gap:8px;margin-top:12px}
+  .hero-actions .btn{flex:1 1 calc(50% - 8px);padding:11px 8px;font-size:13px}
+  .proof-row{font-size:12px;margin-top:10px}
+  .hero-show{border-radius:16px}
+  .hero-show-head{padding:10px 12px}
+  .hero-show-head strong{font-size:13px}
+  .hero-show-head span{font-size:11px}
+  .hero-phones{grid-template-columns:1fr 1fr;gap:8px;padding:8px}
+  .hero-phone{animation:none}
+  .hero-phone img{height:92px;padding:8px}
+  .hero-phone.main img{height:112px}
+  .hp-tag{font-size:10px;padding:3px 8px;left:6px;top:6px}
+  .hp-name{font-size:10px;padding:3px 8px;left:6px;bottom:6px}
+  .hero-take{display:none}
+  .hero-foot div{padding:8px 10px}
+  .hero-foot strong{font-size:13px}
+  .hero-foot span{font-size:10.5px}
+  .trust{margin:12px 0 4px}
+  .trust div{padding:12px}
+  .trust strong{font-size:17px}
+  .grid-acc,.steps{grid-template-columns:1fr}
+  .grid-catalog{gap:10px}
+  .grid-catalog .card{flex:0 0 calc((100% - 10px) / 2)}
+  .card-top{padding:8px}
+  .card-photo{height:132px;border-radius:10px}
+  .card-photo img{padding:6px}
+  .badge{left:10px;top:10px;font-size:9.5px;padding:4px 8px}
+  .card-body{padding:10px;gap:4px}
+  .card-body h3{font-size:12.5px}
+  .specs{font-size:11px}
+  .price{font-size:15px}
+  .old{font-size:11px}
+  .card-btns{gap:6px;margin-top:8px}
+  .mini-btn{font-size:11px;padding:8px 4px}
+  .car-btn.overlay{width:36px;height:36px;font-size:16px;top:34%}
+  .car-btn.overlay.left{left:4px}
+  .car-btn.overlay.right{right:4px}
   .hero-phones{grid-template-columns:1fr 1fr}
   .header-cta .btn{display:none}
   .sticky-cta{display:flex}
